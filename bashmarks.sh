@@ -39,7 +39,7 @@ fi
 touch $SDIRS
 
 # save current directory to bookmarks
-function s {
+function sbm {
     check_help $1
     _bookmark_name_valid "$@"
     if [ -z "$exit_message" ]; then
@@ -50,21 +50,21 @@ function s {
 }
 
 # jump to bookmark
-function g {
+function gbm {
     check_help $1
     source $SDIRS
     cd "$(eval $(echo echo $(echo \$DIR_$1)))"
 }
 
 # print bookmark
-function p {
+function pbm {
     check_help $1
     source $SDIRS
     echo "$(eval $(echo echo $(echo \$DIR_$1)))"
 }
 
 # delete bookmark
-function d {
+function dbm {
     check_help $1
     _bookmark_name_valid "$@"
     if [ -z "$exit_message" ]; then
@@ -87,7 +87,7 @@ function check_help {
 }
 
 # list bookmarks with dirnam
-function l {
+function lbm {
     check_help $1
     source $SDIRS
         
@@ -148,9 +148,9 @@ function _purge_line {
 
 # bind completion command for g,p,d to _comp
 if [ $ZSH_VERSION ]; then
-    compctl -K _compzsh g
-    compctl -K _compzsh p
-    compctl -K _compzsh d
+    compctl -K _compzsh gbm
+    compctl -K _compzsh pbm
+    compctl -K _compzsh dbm
 else
     shopt -s progcomp
     complete -F _comp g
